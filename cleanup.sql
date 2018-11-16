@@ -1,2 +1,2 @@
-drop user canary_sch;
+drop user canary_sch cascade;
 drop tablespace canary_ts;

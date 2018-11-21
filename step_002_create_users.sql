@@ -5,3 +5,6 @@ grant create session to canary_sch;
 grant unlimited tablespace to canary_sch;
 grant select_catalog_role to canary_sch;
 alter user canary_sch enable editions;
+create user canary_app
+identified by "&canary_app_password";
+grant resource, connect to canary_app;

@@ -1,3 +1,4 @@
+prompt connect as Canary Schema ID
 connect canary_sch@&database
 CREATE TABLE ebr_test_tab 
 (field1 varchar2(128),

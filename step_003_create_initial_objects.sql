@@ -18,3 +18,4 @@ BEGIN
   RETURN max_field2;
 END;
 /
+GRANT EXECUTE ON get_max_field2 TO canary_app;

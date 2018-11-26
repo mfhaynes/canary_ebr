@@ -14,7 +14,13 @@ CREATE OR REPLACE FUNCTION get_max_field2 RETURN number
 IS
   max_field2 number;
 BEGIN
-  SELECT max(field2) INTO max_field2 FROM ebr_test_tab_01;
+  FOR test_rec IN (SELECT * FROM ebr_test_tab_01)
+  LOOP
+    IF test_rec.field2 > max_field2 OR max_field2 IS NULL
+    THEN
+      max_field2 := test_rec.field2;
+    END IF;
+  END LOOP;
   RETURN max_field2;
 END;
 /

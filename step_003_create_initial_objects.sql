@@ -1,27 +1,35 @@
 prompt connect as Canary Schema ID
 connect canary_sch@&database
-CREATE TABLE ebr_test_tab_01
-(field1 varchar2(128),
- field2 number,
- field3 char(1000))
+CREATE TABLE ebr_things_b
+(thing_id number NOT NULL,
+ thing_name varchar2(128),
+ thing_create_date date)
 tablespace canary_ts;
-INSERT INTO ebr_test_tab_01
-(SELECT object_name, object_id, object_name FROM dba_objects);
+CREATE UNIQUE INDEX ebr_things_pkidx
+ON ebr_things_b (thing_id)
+tablespace canary_ts;
+ALTER TABLE ebr_things_b
+ADD CONSTRAINT ebr_things_pk PRIMARY KEY (thing_id)
+    USING INDEX ebr_things_pkidx;
+INSERT INTO ebr_things_b
+(SELECT object_id, object_name, created FROM dba_objects
+ WHERE object_id IS NOT NULL);
 COMMIT;
-INSERT INTO ebr_test_tab_01 (SELECT * FROM ebr_test_tab_01);
+CREATE TABLE ebr_thing_attributes_b
+(thing_id number NOT NULL,
+ thing_attribute_type varchar2(30) NOT NULL,
+ thing_attribute_value varchar2(30))
+tablespace canary_ts;
+ALTER TABLE ebr_thing_attributes_b
+ADD CONSTRAINT thing_id_fk
+FOREIGN KEY (thing_id)
+REFERENCES ebr_things_b (thing_id);
+INSERT INTO ebr_thing_attributes_b
+(SELECT object_id, 'object_type', object_type
+ FROM dba_objects
+ WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
+INSERT INTO ebr_thing_attributes_b
+(SELECT object_id, 'editionable_flag', editionable
+ FROM dba_objects
+ WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
 COMMIT;
-CREATE OR REPLACE FUNCTION get_max_field2 RETURN number
-IS
-  max_field2 number;
-BEGIN
-  FOR test_rec IN (SELECT * FROM ebr_test_tab_01)
-  LOOP
-    IF test_rec.field2 > max_field2 OR max_field2 IS NULL
-    THEN
-      max_field2 := test_rec.field2;
-    END IF;
-  END LOOP;
-  RETURN max_field2;
-END;
-/
-GRANT EXECUTE ON get_max_field2 TO canary_app;

@@ -32,4 +32,7 @@ INSERT INTO ebr_thing_attributes_b
 (SELECT object_id, 'editionable_flag', editionable
  FROM dba_objects
  WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
+CREATE INDEX ebr_thing_attributes_idx
+ON ebr_thing_attributes_b (thing_id, thing_attribute_type)
+tablespace canary_ts;
 COMMIT;

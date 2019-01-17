@@ -4,12 +4,20 @@ import cx_Oracle
 import getpass
 from datetime import datetime
 
+def make_connection(p_password):
+    v_connection = cx_Oracle.connect('canary_app',v_password,'mfhsrc02_pdb1')
+    v_cursor = v_connection.cursor()
+    v_cursor.execute("select sys_context('USERENV', 'SESSION_EDITION_NAME') from dual")
+    v_edition = v_cursor.fetchone()[0]
+    v_start_time = datetime.now()
+    return v_connection, v_cursor, v_edition, v_start_time
+
 v_password = getpass.getpass('Enter password: ')
-v_connection = cx_Oracle.connect('canary_app',v_password,'mfhsrc02_pdb1')
-v_cursor = v_connection.cursor()
+v_connection, v_cursor, v_edition, v_start_time = make_connection(v_password)
 v_cursor.execute ('select object_id from all_objects');
 v_object_keys = v_cursor.fetchall()
 v_counter = 0
+# Reset start time to clear out time spent getting keys.
 v_start_time = datetime.now()
 for v_object_key in v_object_keys:
     v_counter += 1
@@ -18,10 +26,8 @@ for v_object_key in v_object_keys:
     v_thing = v_cursor.fetchone()
     if v_counter == 1000:
         v_total_time = datetime.now()-v_start_time
-        print(str(v_total_time))
+        print(v_edition.ljust(30) + str(v_total_time))
+        v_counter = 0
         # Close and re-open the connection for demo purposes.
         v_connection.close()
-        v_connection = cx_Oracle.connect('canary_app',v_password,'mfhsrc02_pdb1')
-        v_cursor = v_connection.cursor()
-        v_counter = 0
-        v_start_time = datetime.now()
+        v_connection, v_cursor, v_edition, v_start_time = make_connection(v_password)

@@ -32,7 +32,35 @@ INSERT INTO ebr_thing_attributes_b
 (SELECT object_id, 'editionable_flag', editionable
  FROM dba_objects
  WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
-CREATE INDEX ebr_thing_attributes_idx
+INSERT INTO ebr_thing_attributes_b
+(SELECT object_id, 'status', status
+ FROM dba_objects
+ WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
+INSERT INTO ebr_thing_attributes_b
+(SELECT object_id, 'temporary_flag', temporary
+ FROM dba_objects
+ WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
+INSERT INTO ebr_thing_attributes_b
+(SELECT object_id, 'generated_flag', generated
+ FROM dba_objects
+ WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
+INSERT INTO ebr_thing_attributes_b
+(SELECT object_id, 'secondary_flag', secondary
+ FROM dba_objects
+ WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
+INSERT INTO ebr_thing_attributes_b
+(SELECT object_id, 'timestamp', timestamp
+ FROM dba_objects
+ WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
+INSERT INTO ebr_thing_attributes_b
+(SELECT object_id, 'default_collation', default_collation
+ FROM dba_objects
+ WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
+CREATE UNIQUE INDEX ebr_thing_attributes_pkidx
 ON ebr_thing_attributes_b (thing_id, thing_attribute_type)
 tablespace canary_ts;
+ALTER TABLE ebr_thing_attributes_b
+ADD CONSTRAINT ebr_thing_attributes_pk 
+    PRIMARY KEY (thing_id, thing_attribute_type)
+    USING INDEX ebr_thing_attributes_pkidx;
 COMMIT;

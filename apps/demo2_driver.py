@@ -2,8 +2,17 @@
 
 import getpass
 import demo2_library
-#from datetime import datetime
+import imp
+import hashlib
 
+def get_file_checksum(p_file_name):
+    v_hasher_object = hashlib.md5()
+    with open(p_file_name, 'rb') as v_library_file:
+        v_file_chunk = v_library_file.read()
+        v_hasher_object.update(v_file_chunk)
+    return v_hasher_object.hexdigest()
+
+v_current_checksum = get_file_checksum('demo2_library.py')
 v_password = getpass.getpass('Enter password: ')
 v_iteration_counter = 0
 while [ 1 == 1 ]:
@@ -22,3 +31,8 @@ while [ 1 == 1 ]:
                + '   '
                + str(v_average_ms).rjust(16))
     print ('---------------------------------------------------------------------')
+    v_new_checksum = get_file_checksum('demo2_library.py')
+    if v_new_checksum != v_current_checksum:
+        print ('Re-importing!')
+        v_current_checksum = v_new_checksum
+        imp.reload(demo2_library)

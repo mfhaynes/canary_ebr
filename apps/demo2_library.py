@@ -17,7 +17,7 @@ def run_app(p_password):
     v_cursor.execute ('select object_id from all_objects where rownum <= 5000');
     v_object_keys = v_cursor.fetchall()
     v_counter = 0
-    # Reset start time to clear out time spent getting keys.
+    # Reset start time to adjust for time spent getting keys.
     v_start_time = datetime.now()
     for v_object_key in v_object_keys:
         v_counter += 1

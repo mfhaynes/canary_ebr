@@ -5,7 +5,7 @@ import getpass
 from datetime import datetime
 
 def make_connection(p_password):
-    v_connection = cx_Oracle.connect('canary_app',v_password,'mfhsrc02_pdb1')
+    v_connection = cx_Oracle.connect('canary_app',p_password,'mfhsrc02_pdb1')
     v_cursor = v_connection.cursor()
     v_cursor.execute("select sys_context('USERENV', 'SESSION_EDITION_NAME') from dual")
     v_edition = v_cursor.fetchone()[0]

@@ -26,9 +26,9 @@ while [ 1 == 1 ]:
     for v_object_key in v_object_keys:
         v_counter += 1
         v_app_query = """select t.thing_id, t.thing_name, t.thing_create_date,
-                         object_type, editionable_flag, status,
-                         temporary_flag, generated_flag, secondary_flag,
-                         timestamp, default_collation
+                         t.object_type, t.editionable_flag, t.status,
+                         t.temporary_flag, t.generated_flag, t.secondary_flag,
+                         t.timestamp, t.default_collation
                          from canary_sch.ebr_things t
                          where t.thing_id = :thing
         """

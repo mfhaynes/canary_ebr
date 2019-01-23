@@ -1,3 +1,4 @@
+prompt Connect as System ID
 @../private/connect_system.sql
 CREATE OR REPLACE FUNCTION get_random_edition RETURN VARCHAR2 AS
     v_selected_edition VARCHAR2(128);

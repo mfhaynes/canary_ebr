@@ -1,4 +1,6 @@
 ALTER TRIGGER ebr_thing_attr_fwd_xed_trig ENABLE;
+ALTER TRIGGER ebr_thing_attr_rev_xed_trig ENABLE;
+
 UPDATE canary_sch.edition_router 
 SET percentage = .75
 WHERE edition_name = 'ORA$BASE';

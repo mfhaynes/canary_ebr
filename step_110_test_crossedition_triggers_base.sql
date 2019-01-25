@@ -31,3 +31,13 @@ commit;
 PAUSE DELETE test
 delete from canary_sch.ebr_thing_attributes where thing_id = -999 and thing_attribute_type = 'status';
 commit;
+PAUSE check the number of attributes showing up in base edition before deleting in release1 edition
+select count(*) From canary_sch.ebr_thing_attributes where thing_id = -999;
+PAUSE check the number of attributes showing up in base edition after deleting in release1 edition
+select count(*) From canary_sch.ebr_thing_attributes where thing_id = -999;
+PAUSE check for rows in both tables with thing_id = -1234 before performing insert in release1
+select * from canary_sch.ebr_things where thing_id = -1234;
+select * from canary_sch.ebr_thing_attributes where thing_id = -1234;
+PAUSE check for rows in both tables with thing_id = -1234 after performing insert in release1
+select * from canary_sch.ebr_things where thing_id = -1234;
+select * from canary_sch.ebr_thing_attributes where thing_id = -1234;

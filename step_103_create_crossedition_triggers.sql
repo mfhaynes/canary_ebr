@@ -13,7 +13,6 @@ BEGIN
              END;
         WHEN 'editionable_flag'
         THEN BEGIN
-                 dbms_output.put_line('In WHEN/UPDATE');
                  UPDATE ebr_things_b
                  SET editionable_flag = NULL
                  WHERE thing_id = :old.thing_id;
@@ -113,11 +112,54 @@ END;
 /
 
 
-CREATE OR REPLACE TRIGGER ebr_thing_attr_rev_xed_trig
-BEFORE INSERT OR UPDATE OR DELETE ON ebr_thing_attributes_b
+CREATE OR REPLACE TRIGGER ebr_thing_attr_rev_xed_trig_d
+BEFORE DELETE on ebr_things_b
 FOR EACH ROW
 REVERSE CROSSEDITION DISABLE
 BEGIN
-    NULL;
+    DELETE from ebr_thing_attributes_b
+    WHERE thing_id = :old.thing_id;
+END;
+/
+
+CREATE OR REPLACE TRIGGER ebr_thing_attr_rev_xed_trig_iu
+AFTER INSERT OR UPDATE ON ebr_things_b
+FOR EACH ROW
+REVERSE CROSSEDITION DISABLE
+BEGIN
+    IF INSERTING THEN
+        IF :new.object_type is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'object_type', :new.object_type);
+        END IF;
+        IF :new.editionable_flag is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'editionable_flag', :new.editionable_flag);
+        END IF;
+        IF :new.status is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'status', :new.status);
+        END IF;
+        IF :new.temporary_flag is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'temporary_flag', :new.temporary_flag);
+        END IF;
+        IF :new.generated_flag is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'generated_flag', :new.generated_flag);
+        END IF;
+        IF :new.secondary_flag is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'secondary_flag', :new.secondary_flag);
+        END IF;
+        IF :new.timestamp is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'timestamp', :new.timestamp);
+        END IF;
+        IF :new.default_collation is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'default_collation', :new.default_collation);
+        END IF;
+    END IF;
 END;
 /

@@ -8,20 +8,20 @@ PAUSE show information about the attribute for one THING
 select attr.*
 from canary_sch.ebr_thing_attributes attr
 join canary_sch.ebr_things t on attr.thing_id = t.thing_id
-where t.thing_name = 'V_$SESSION'
+where t.thing_id = 'GUMBALL'
   and attr.thing_attribute_type = 'attribute1';
 
 PAUSE switch to other window and run first query
 PAUSE update the data here
 update canary_sch.ebr_thing_attributes attr
-set thing_attribute_value = 'SUPER-VIEW'
-where thing_id in (select thing_id from canary_sch.ebr_things where thing_name = 'V_$SESSION')
+set thing_attribute_value = 'YELLOW'
+where thing_id in (select thing_id from canary_sch.ebr_things where thing_name = 'GUMBALL')
   and thing_attribute_type = 'attribute1';
 
 select attr.*
 from canary_sch.ebr_thing_attributes attr
 join canary_sch.ebr_things t on attr.thing_id = t.thing_id
-where t.thing_name = 'V_$SESSION'
+where t.thing_name = 'GUMBALL'
   and attr.thing_attribute_type = 'attribute1';
 
 PAUSE Switch to other window to run pre-commit query

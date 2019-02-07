@@ -2,8 +2,8 @@ connect canary_sch@&database edition=release1
 pause Add New Columns to THINGS table.
 ALTER TABLE ebr_things_b
 ADD (attribute1 varchar2(30),
-     attribute2 varchar2(7),
-     attribute3 varchar2(19),
+     attribute2 varchar2(30),
+     attribute3 varchar2(30),
      attribute4 varchar2(100),
      flag1 varchar2(1),
      flag2 varchar2(1),

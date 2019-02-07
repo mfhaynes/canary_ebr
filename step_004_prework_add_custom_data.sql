@@ -43,3 +43,5 @@ insert into ebr_thing_attributes_b
 (thing_id, thing_attribute_type, thing_attribute_value)
 values
 (-123, 'flag4', 'Y');
+
+commit;

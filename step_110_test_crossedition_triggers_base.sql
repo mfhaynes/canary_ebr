@@ -8,7 +8,7 @@ PAUSE show information about the attribute for one THING
 select attr.*
 from canary_sch.ebr_thing_attributes attr
 join canary_sch.ebr_things t on attr.thing_id = t.thing_id
-where t.thing_id = 'GUMBALL'
+where t.thing_name = 'GUMBALL'
   and attr.thing_attribute_type = 'attribute1';
 
 PAUSE switch to other window and run first query

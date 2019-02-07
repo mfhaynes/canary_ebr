@@ -34,9 +34,9 @@ select * from ebr_things where thing_name = 'EBR_TEST_THING';
 
 PAUSE INSERT new thing and attributes.
 insert into canary_sch.ebr_things values(-999,'EBR_TEST_THING',sysdate);
-insert into canary_sch.ebr_thing_attributes values (-999,'attribute1','SUPER-DUPER-VIEW');
-insert into canary_sch.ebr_thing_attributes values (-999,'attribute2','INVALID');
-insert into canary_sch.ebr_thing_attributes values (-999,'attribute3','COLUMBUS');
+insert into canary_sch.ebr_thing_attributes values (-999,'attribute1','ORANGE');
+insert into canary_sch.ebr_thing_attributes values (-999,'attribute2','OBLONG');
+insert into canary_sch.ebr_thing_attributes values (-999,'attribute3','COLUMBUS MANUFACTURERS');
 insert into canary_sch.ebr_thing_attributes values (-999,'flag1','Y');
 insert into canary_sch.ebr_thing_attributes values (-999,'flag2','N');
 insert into canary_sch.ebr_thing_attributes values (-999,'flag3','N');
@@ -45,7 +45,7 @@ commit;
 PAUSE Switch to other window to look at EBR_TEST_THING data.
 PAUSE DELETE one attribute for EBR_TEST_THING and update another.
 delete from canary_sch.ebr_thing_attributes where thing_id = -999 and thing_attribute_type = 'attribute2';
-update canary_sch.ebr_thing_attributes set thing_attribute_value = 'DENVER'
+update canary_sch.ebr_thing_attributes set thing_attribute_value = 'DENVER AMALGAMATED PARTNERS'
 where thing_id = -999 and thing_attribute_type = 'attribute3';
 commit;
 
@@ -53,13 +53,22 @@ PAUSE Switch to other window to look at updated EBR_TEST_THING data.
 
 PAUSE Start to Test Reverse Cross-Edition Triggers
 
-PAUSE check the number of attributes showing up in base edition before deleting in release1 edition
+PAUSE check the color of our gumball before making change in other window.
+SELECT * from canary_sch.ebr_thing_attributes where thing_id = -123;
+
+PAUSE check the color of our gumball after making change in other window.
+SELECT * from canary_sch.ebr_thing_attributes where thing_id = -123;
+
+PAUSE check the number of attributes showing up for TEST_THING before deleting in release1 edition
 select count(*) From canary_sch.ebr_thing_attributes where thing_id = -999;
-PAUSE check the number of attributes showing up in base edition after deleting in release1 edition
+
+PAUSE check the number of attributes showing up for TEST_THING after deleting in release1 edition
 select count(*) From canary_sch.ebr_thing_attributes where thing_id = -999;
-PAUSE check for rows in both tables with thing_id = -1234 before performing insert in release1
-select * from canary_sch.ebr_things where thing_id = -1234;
-select * from canary_sch.ebr_thing_attributes where thing_id = -1234;
-PAUSE check for rows in both tables with thing_id = -1234 after performing insert in release1
-select * from canary_sch.ebr_things where thing_id = -1234;
-select * from canary_sch.ebr_thing_attributes where thing_id = -1234;
+
+PAUSE check for rows in both tables with thing_id = -2319 before performing insert in release1
+select * from canary_sch.ebr_things where thing_id = -2319;
+select * from canary_sch.ebr_thing_attributes where thing_id = -2319;
+
+PAUSE check for rows in both tables with thing_id = -2319 after performing insert in release1
+select * from canary_sch.ebr_things where thing_id = -2319;
+select * from canary_sch.ebr_thing_attributes where thing_id = -2319;

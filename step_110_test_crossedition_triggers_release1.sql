@@ -35,3 +35,27 @@ PAUSE Query EBR_TEST_THING data after commit in other window.
 select * from canary_sch.ebr_things t
 where t.thing_name = 'EBR_TEST_THING';
 
+PAUSE switch to other window to check gumball color.
+PAUSE UPDATE our GUMBALL
+update canary_sch.ebr_things
+set attribute1 = 'GREEN'
+where thing_id = -123;
+commit;
+
+PAUSE switch to other window to query
+PAUSE DELETE EBR_TEST_THING
+delete from canary_sch.ebr_things
+where thing_name = 'EBR_TEST_THING';
+commit;
+
+PAUSE switch to other window to query
+PAUSE INSERT new row
+insert into canary_sch.ebr_things
+(thing_id, thing_name, thing_create_date,
+ attribute1, attribute2, attribute3, attribute4,
+ flag1, flag2, flag3, flag4)
+values
+(-2319, 'NEW TEST THING', sysdate,
+ 'GREEN', 'SQUARE', 'JONES INDUSTRIES', 'MAGICAL',
+ 'N', 'N', 'N', 'N');
+commit;

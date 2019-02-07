@@ -1,5 +1,3 @@
-prompt Connect as canary_sch
-connect canary_sch@mfhsrc02_pdb1
 set echo on
 select count(*) from canary_sch.ebr_things;
 

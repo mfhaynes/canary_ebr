@@ -1,3 +1,6 @@
+prompt connect as Canary Schema ID
+connect canary_sch@&database
+set echo on
 CREATE OR REPLACE EDITIONING VIEW ebr_things AS
 SELECT thing_id, thing_name, thing_create_date
 FROM ebr_things_b;

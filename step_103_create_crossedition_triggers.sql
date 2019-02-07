@@ -1,3 +1,4 @@
+pause Create the Forward Cross-Edition Trigger
 CREATE OR REPLACE TRIGGER ebr_thing_attr_fwd_xed_trig
 BEFORE INSERT OR UPDATE OR DELETE ON ebr_thing_attributes_b
 FOR EACH ROW
@@ -5,52 +6,52 @@ FORWARD CROSSEDITION DISABLE
 BEGIN
     IF DELETING THEN
         CASE :old.thing_attribute_type
-        WHEN 'object_type'
+        WHEN 'attribute1'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET object_type = NULL
+                 SET attribute1 = NULL
                  WHERE thing_id = :old.thing_id;
              END;
-        WHEN 'editionable_flag'
+        WHEN 'attribute2'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET editionable_flag = NULL
+                 SET attribute2 = NULL
                  WHERE thing_id = :old.thing_id;
              END;
-        WHEN 'status'
+        WHEN 'attribute3'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET status = NULL
+                 SET attribute3 = NULL
                  WHERE thing_id = :old.thing_id;
              END;
-        WHEN 'temporary_flag'
+        WHEN 'attribute4'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET temporary_flag = NULL
+                 SET attribute4 = NULL
                  WHERE thing_id = :old.thing_id;
              END;
-        WHEN 'generated_flag'
+        WHEN 'flag1'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET generated_flag = NULL
+                 SET flag1 = NULL
                  WHERE thing_id = :old.thing_id;
              END;
-        WHEN 'secondary_flag'
+        WHEN 'flag2'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET secondary_flag = NULL
+                 SET flag2 = NULL
                  WHERE thing_id = :old.thing_id;
              END;
-        WHEN 'timestamp'
+        WHEN 'flag3'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET timestamp = NULL
+                 SET flag3 = NULL
                  WHERE thing_id = :old.thing_id;
              END;
-        WHEN 'default_collation'
+        WHEN 'flag4'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET default_collation = NULL
+                 SET flag4 = NULL
                  WHERE thing_id = :old.thing_id;
              END;
         END CASE;
@@ -58,52 +59,52 @@ BEGIN
 
     IF INSERTING OR UPDATING THEN
         CASE :new.thing_attribute_type
-        WHEN 'object_type'
+        WHEN 'attribute1'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET object_type = :new.thing_attribute_value
+                 SET attribute1 = :new.thing_attribute_value
                  WHERE thing_id = :new.thing_id;
              END;
-        WHEN 'editionable_flag'
+        WHEN 'attribute2'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET editionable_flag = :new.thing_attribute_value
+                 SET attribute2 = :new.thing_attribute_value
                  WHERE thing_id = :new.thing_id;
              END;
-        WHEN 'status'
+        WHEN 'attribute3'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET status = :new.thing_attribute_value
+                 SET attribute3 = :new.thing_attribute_value
                  WHERE thing_id = :new.thing_id;
              END;
-        WHEN 'temporary_flag'
+        WHEN 'attribute4'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET temporary_flag = :new.thing_attribute_value
+                 SET attribute4 = :new.thing_attribute_value
                  WHERE thing_id = :new.thing_id;
              END;
-        WHEN 'generated_flag'
+        WHEN 'flag1'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET generated_flag = :new.thing_attribute_value
+                 SET flag1 = :new.thing_attribute_value
                  WHERE thing_id = :new.thing_id;
              END;
-        WHEN 'secondary_flag'
+        WHEN 'flag2'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET secondary_flag = :new.thing_attribute_value
+                 SET flag2 = :new.thing_attribute_value
                  WHERE thing_id = :new.thing_id;
              END;
-        WHEN 'timestamp'
+        WHEN 'flag3'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET timestamp = :new.thing_attribute_value
+                 SET flag3 = :new.thing_attribute_value
                  WHERE thing_id = :new.thing_id;
              END;
-        WHEN 'default_collation'
+        WHEN 'flag4'
         THEN BEGIN
                  UPDATE ebr_things_b
-                 SET default_collation = :new.thing_attribute_value
+                 SET flag4 = :new.thing_attribute_value
                  WHERE thing_id = :new.thing_id;
              END;
         END CASE;
@@ -112,6 +113,7 @@ END;
 /
 
 
+pause Create Reverse Cross-Edition Trigger to DELETE all attributes BEFORE deleting a THING.
 CREATE OR REPLACE TRIGGER ebr_thing_attr_rev_xed_trig_d
 BEFORE DELETE on ebr_things_b
 FOR EACH ROW
@@ -122,43 +124,44 @@ BEGIN
 END;
 /
 
+pause Create Reverse Cross-Edition Trigger to INSERT or UPDATE attributes applied to a THING.
 CREATE OR REPLACE TRIGGER ebr_thing_attr_rev_xed_trig_iu
 AFTER INSERT OR UPDATE ON ebr_things_b
 FOR EACH ROW
 REVERSE CROSSEDITION DISABLE
 BEGIN
     IF INSERTING THEN
-        IF :new.object_type is NOT NULL THEN
+        IF :new.attribute1 is NOT NULL THEN
             INSERT into ebr_thing_attributes_b
-            VALUES (:new.thing_id, 'object_type', :new.object_type);
+            VALUES (:new.thing_id, 'attribute1', :new.attribute1);
         END IF;
-        IF :new.editionable_flag is NOT NULL THEN
+        IF :new.attribute2 is NOT NULL THEN
             INSERT into ebr_thing_attributes_b
-            VALUES (:new.thing_id, 'editionable_flag', :new.editionable_flag);
+            VALUES (:new.thing_id, 'attribute2', :new.attribute2);
         END IF;
-        IF :new.status is NOT NULL THEN
+        IF :new.attribute3 is NOT NULL THEN
             INSERT into ebr_thing_attributes_b
-            VALUES (:new.thing_id, 'status', :new.status);
+            VALUES (:new.thing_id, 'attribute3', :new.attribute3);
         END IF;
-        IF :new.temporary_flag is NOT NULL THEN
+        IF :new.attribute4 is NOT NULL THEN
             INSERT into ebr_thing_attributes_b
-            VALUES (:new.thing_id, 'temporary_flag', :new.temporary_flag);
+            VALUES (:new.thing_id, 'attribute4', :new.attribute4);
         END IF;
-        IF :new.generated_flag is NOT NULL THEN
+        IF :new.flag1 is NOT NULL THEN
             INSERT into ebr_thing_attributes_b
-            VALUES (:new.thing_id, 'generated_flag', :new.generated_flag);
+            VALUES (:new.thing_id, 'flag1', :new.flag1);
         END IF;
-        IF :new.secondary_flag is NOT NULL THEN
+        IF :new.flag2 is NOT NULL THEN
             INSERT into ebr_thing_attributes_b
-            VALUES (:new.thing_id, 'secondary_flag', :new.secondary_flag);
+            VALUES (:new.thing_id, 'flag2', :new.flag2);
         END IF;
-        IF :new.timestamp is NOT NULL THEN
+        IF :new.flag3 is NOT NULL THEN
             INSERT into ebr_thing_attributes_b
-            VALUES (:new.thing_id, 'timestamp', :new.timestamp);
+            VALUES (:new.thing_id, 'flag3', :new.flag3);
         END IF;
-        IF :new.default_collation is NOT NULL THEN
+        IF :new.flag4 is NOT NULL THEN
             INSERT into ebr_thing_attributes_b
-            VALUES (:new.thing_id, 'default_collation', :new.default_collation);
+            VALUES (:new.thing_id, 'flag4', :new.flag4);
         END IF;
     END IF;
 END;

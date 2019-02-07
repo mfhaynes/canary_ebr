@@ -1,6 +1,5 @@
 CREATE OR REPLACE VIEW ebr_things_with_attributes AS
 SELECT thing_id, thing_name, thing_create_date,
-       object_type, editionable_flag, status,
-       temporary_flag, generated_flag, secondary_flag,
-       timestamp, default_collation
+       attribute1, attribute2, attribute3, attribute4,
+       flag1, flag2, flag3, flag4
 FROM ebr_things;

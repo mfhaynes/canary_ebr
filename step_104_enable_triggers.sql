@@ -1,0 +1,3 @@
+ALTER TRIGGER ebr_thing_attr_fwd_xed_trig ENABLE;
+ALTER TRIGGER ebr_thing_attr_rev_xed_trig_d ENABLE;
+ALTER TRIGGER ebr_thing_attr_rev_xed_trig_iu ENABLE;

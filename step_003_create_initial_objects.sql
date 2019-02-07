@@ -25,35 +25,35 @@ ADD CONSTRAINT thing_id_fk
 FOREIGN KEY (thing_id)
 REFERENCES ebr_things_b (thing_id);
 INSERT INTO ebr_thing_attributes_b
-(SELECT object_id, 'object_type', object_type
+(SELECT object_id, 'attribute1', object_type
  FROM dba_objects
  WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
 INSERT INTO ebr_thing_attributes_b
-(SELECT object_id, 'editionable_flag', editionable
+(SELECT object_id, 'attribute2', status
  FROM dba_objects
  WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
 INSERT INTO ebr_thing_attributes_b
-(SELECT object_id, 'status', status
+(SELECT object_id, 'attribute3', timestamp
  FROM dba_objects
  WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
 INSERT INTO ebr_thing_attributes_b
-(SELECT object_id, 'temporary_flag', temporary
+(SELECT object_id, 'attribute4', default_collation
  FROM dba_objects
  WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
 INSERT INTO ebr_thing_attributes_b
-(SELECT object_id, 'generated_flag', generated
+(SELECT object_id, 'flag1', editionable
  FROM dba_objects
  WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
 INSERT INTO ebr_thing_attributes_b
-(SELECT object_id, 'secondary_flag', secondary
+(SELECT object_id, 'flag2', temporary
  FROM dba_objects
  WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
 INSERT INTO ebr_thing_attributes_b
-(SELECT object_id, 'timestamp', timestamp
+(SELECT object_id, 'flag3', generated
  FROM dba_objects
  WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
 INSERT INTO ebr_thing_attributes_b
-(SELECT object_id, 'default_collation', default_collation
+(SELECT object_id, 'flag4', secondary
  FROM dba_objects
  WHERE object_id IN (SELECT thing_id FROM ebr_things_b));
 CREATE UNIQUE INDEX ebr_thing_attributes_pkidx

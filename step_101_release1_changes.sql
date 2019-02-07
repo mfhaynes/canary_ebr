@@ -1,13 +1,17 @@
 connect canary_sch@&database edition=release1
+pause Add New Columns to THINGS table.
 ALTER TABLE ebr_things_b
-ADD (object_type varchar2(30),
-     editionable_flag varchar2(1),
-     status varchar2(7),
-     temporary_flag varchar2(1),
-     generated_flag varchar2(1),
-     secondary_flag varchar2(1),
-     timestamp varchar2(19),
-     default_collation varchar2(100));
+ADD (attribute1 varchar2(30),
+     attribute2 varchar2(7),
+     attribute3 varchar2(19),
+     attribute4 varchar2(100),
+     flag1 varchar2(1),
+     flag2 varchar2(1),
+     flag3 varchar2(1),
+     flag4 varchar2(1));
+
+pause Load the new columns on the THINGS table from the ATTRIBUTES table.
+pause Do this in a loop with incremental commits to avoid any lengthy locks.
 DECLARE
     v_continue boolean;
 BEGIN
@@ -15,40 +19,40 @@ BEGIN
     WHILE v_continue
     LOOP
         UPDATE ebr_things_b thing
-        SET object_type = (SELECT thing_attribute_value
-                           FROM ebr_thing_attributes_b attr
-                           WHERE thing.thing_id = attr.thing_id
-                             AND thing_attribute_type = 'object_type'),
-            editionable_flag = (SELECT thing_attribute_value
-                                FROM ebr_thing_attributes_b attr
-                                WHERE thing.thing_id = attr.thing_id
-                                  AND thing_attribute_type = 'editionable_flag'),
-            status = (SELECT thing_attribute_value
-                      FROM ebr_thing_attributes_b attr
-                      WHERE thing.thing_id = attr.thing_id
-                        AND thing_attribute_type = 'status'),
-            temporary_flag = (SELECT thing_attribute_value
-                              FROM ebr_thing_attributes_b attr
-                              WHERE thing.thing_id = attr.thing_id
-                                AND thing_attribute_type = 'temporary_flag'),
-            generated_flag = (SELECT thing_attribute_value
-                              FROM ebr_thing_attributes_b attr
-                              WHERE thing.thing_id = attr.thing_id
-                                AND thing_attribute_type = 'generated_flag'),
-            secondary_flag = (SELECT thing_attribute_value
-                              FROM ebr_thing_attributes_b attr
-                              WHERE thing.thing_id = attr.thing_id
-                                AND thing_attribute_type = 'secondary_flag'),
-            timestamp = (SELECT thing_attribute_value
-                         FROM ebr_thing_attributes_b attr
-                         WHERE thing.thing_id = attr.thing_id
-                           AND thing_attribute_type = 'timestamp'),
-            default_collation = (SELECT thing_attribute_value
-                                 FROM ebr_thing_attributes_b attr
-                                 WHERE thing.thing_id = attr.thing_id
-                                   AND thing_attribute_type = 'default_collation')
+        SET attribute1 = (SELECT thing_attribute_value
+                          FROM ebr_thing_attributes_b attr
+                          WHERE thing.thing_id = attr.thing_id
+                            AND thing_attribute_type = 'attribute1'),
+            attribute2 = (SELECT thing_attribute_value
+                          FROM ebr_thing_attributes_b attr
+                          WHERE thing.thing_id = attr.thing_id
+                            AND thing_attribute_type = 'attribute2'),
+            attribute3 = (SELECT thing_attribute_value
+                          FROM ebr_thing_attributes_b attr
+                          WHERE thing.thing_id = attr.thing_id
+                            AND thing_attribute_type = 'attribute3'),
+            attribute4 = (SELECT thing_attribute_value
+                          FROM ebr_thing_attributes_b attr
+                          WHERE thing.thing_id = attr.thing_id
+                            AND thing_attribute_type = 'attribute4'),
+            flag1 = (SELECT thing_attribute_value
+                     FROM ebr_thing_attributes_b attr
+                     WHERE thing.thing_id = attr.thing_id
+                       AND thing_attribute_type = 'flag1'),
+            flag2 = (SELECT thing_attribute_value
+                     FROM ebr_thing_attributes_b attr
+                     WHERE thing.thing_id = attr.thing_id
+                       AND thing_attribute_type = 'flag2'),
+            flag3 = (SELECT thing_attribute_value
+                     FROM ebr_thing_attributes_b attr
+                     WHERE thing.thing_id = attr.thing_id
+                       AND thing_attribute_type = 'flag3'),
+            flag4 = (SELECT thing_attribute_value
+                     FROM ebr_thing_attributes_b attr
+                     WHERE thing.thing_id = attr.thing_id
+                       AND thing_attribute_type = 'flag4')
         WHERE rownum <= 1000
-          AND object_type is NULL;
+          AND attribute1 is NULL;
     
         IF SQL%ROWCOUNT > 0 THEN
             v_continue := TRUE;
@@ -60,9 +64,10 @@ BEGIN
     END LOOP;
 END;
 /
+
+pause Update editioning view with new columns.
 CREATE OR REPLACE EDITIONING VIEW ebr_things AS 
 SELECT thing_id, thing_name, thing_create_date,
-       object_type, editionable_flag, status,
-       temporary_flag, generated_flag, secondary_flag,
-       timestamp, default_collation
+       attribute1, attribute2, attribute3, attribute4,
+       flag1, flag2, flag3, flag4
 FROM ebr_things_b;

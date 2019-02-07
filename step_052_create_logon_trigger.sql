@@ -1,3 +1,4 @@
+set echo on
 CREATE OR REPLACE TRIGGER edition_router_trig
 AFTER LOGON ON DATABASE WHEN (user = 'CANARY_APP')
 BEGIN

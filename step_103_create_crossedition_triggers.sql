@@ -164,5 +164,72 @@ BEGIN
             VALUES (:new.thing_id, 'flag4', :new.flag4);
         END IF;
     END IF;
+
+    IF UPDATING THEN
+        IF :new.attribute1 is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'attribute1', :new.attribute1);
+        ELSE
+            DELETE from ebr_thing_attributes_b
+            WHERE thing_id = :new.thing_id
+              AND thing_attribute_type = 'attribute1';
+        END IF;
+        IF :new.attribute2 is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'attribute2', :new.attribute2);
+        ELSE
+            DELETE from ebr_thing_attributes_b
+            WHERE thing_id = :new.thing_id
+              AND thing_attribute_type = 'attribute2';
+        END IF;
+        IF :new.attribute3 is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'attribute3', :new.attribute3);
+        ELSE
+            DELETE from ebr_thing_attributes_b
+            WHERE thing_id = :new.thing_id
+              AND thing_attribute_type = 'attribute3';
+        END IF;
+        IF :new.attribute4 is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'attribute4', :new.attribute4);
+        ELSE
+            DELETE from ebr_thing_attributes_b
+            WHERE thing_id = :new.thing_id
+              AND thing_attribute_type = 'attribute4';
+        END IF;
+        IF :new.flag1 is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'flag1', :new.flag1);
+        ELSE
+            DELETE from ebr_thing_attributes_b
+            WHERE thing_id = :new.thing_id
+              AND thing_attribute_type = 'flag1';
+        END IF;
+        IF :new.flag2 is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'flag2', :new.flag2);
+        ELSE
+            DELETE from ebr_thing_attributes_b
+            WHERE thing_id = :new.thing_id
+              AND thing_attribute_type = 'flag2';
+        END IF;
+        IF :new.flag3 is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'flag3', :new.flag3);
+        ELSE
+            DELETE from ebr_thing_attributes_b
+            WHERE thing_id = :new.thing_id
+              AND thing_attribute_type = 'flag3';
+        END IF;
+        IF :new.flag4 is NOT NULL THEN
+            INSERT into ebr_thing_attributes_b
+            VALUES (:new.thing_id, 'flag4', :new.flag4);
+        ELSE
+            DELETE from ebr_thing_attributes_b
+            WHERE thing_id = :new.thing_id
+              AND thing_attribute_type = 'flag4';
+        END IF;
+    END IF;
 END;
 /

@@ -30,7 +30,7 @@ commit;
 PAUSE switch to other window to run post-commit query
 
 PAUSE Show that no THING called EBR_TEST_THING exists yet.
-select * from ebr_things where thing_name = 'EBR_TEST_THING';
+select * from canary_sch.ebr_things where thing_name = 'EBR_TEST_THING';
 
 PAUSE INSERT new thing and attributes.
 insert into canary_sch.ebr_things values(-999,'EBR_TEST_THING',sysdate);

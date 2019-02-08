@@ -57,7 +57,7 @@ def run_app(p_password):
                          from canary_sch.ebr_things t
                          where t.thing_id = :thing
         """
-        v_cursor.execute(v_app_query, {'thing': v_[0]})
+        v_cursor.execute(v_app_query, {'thing': v_object_key[0]})
         v_thing = v_cursor.fetchone()
         if v_counter == 200:
             v_total_time = datetime.now()-v_start_time

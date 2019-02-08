@@ -25,39 +25,39 @@ def run_app(p_password):
                          (SELECT ta.thing_attribute_value
                           FROM canary_sch.ebr_thing_attributes ta
                           WHERE ta.thing_id = t.thing_id
-                            AND ta.thing_attribute_type = 'object_type') AS object_type,
+                            AND ta.thing_attribute_type = 'attribute1') AS attribute1,
                          (SELECT ta.thing_attribute_value
                           FROM canary_sch.ebr_thing_attributes ta
                           WHERE ta.thing_id = t.thing_id
-                            AND ta.thing_attribute_type = 'editionable_flag') AS editionable_flag,
+                            AND ta.thing_attribute_type = 'attribute2') AS attribute2,
                          (SELECT ta.thing_attribute_value
                           FROM canary_sch.ebr_thing_attributes ta
                           WHERE ta.thing_id = t.thing_id
-                            AND ta.thing_attribute_type = 'status') AS status,
+                            AND ta.thing_attribute_type = 'attribute3') AS attribute3,
                          (SELECT ta.thing_attribute_value
                           FROM canary_sch.ebr_thing_attributes ta
                           WHERE ta.thing_id = t.thing_id
-                            AND ta.thing_attribute_type = 'temporary_flag') AS temporary,
+                            AND ta.thing_attribute_type = 'attribute4') AS attribute4,
                          (SELECT ta.thing_attribute_value
                           FROM canary_sch.ebr_thing_attributes ta
                           WHERE ta.thing_id = t.thing_id
-                            AND ta.thing_attribute_type = 'generated_flag') AS generated,
+                            AND ta.thing_attribute_type = 'flag1') AS flag1,
                          (SELECT ta.thing_attribute_value
                           FROM canary_sch.ebr_thing_attributes ta
                           WHERE ta.thing_id = t.thing_id
-                            AND ta.thing_attribute_type = 'secondary_flag') AS secondary,
+                            AND ta.thing_attribute_type = 'flag2') AS flag2,
                          (SELECT ta.thing_attribute_value
                           FROM canary_sch.ebr_thing_attributes ta
                           WHERE ta.thing_id = t.thing_id
-                            AND ta.thing_attribute_type = 'timestamp') AS timestamp,
+                            AND ta.thing_attribute_type = 'flag3') AS flag3,
                          (SELECT ta.thing_attribute_value
                           FROM canary_sch.ebr_thing_attributes ta
                           WHERE ta.thing_id = t.thing_id
-                            AND ta.thing_attribute_type = 'default_collation') AS default_collation
+                            AND ta.thing_attribute_type = 'flag4') AS flag4
                          from canary_sch.ebr_things t
                          where t.thing_id = :thing
         """
-        v_cursor.execute(v_app_query, {'thing': v_object_key[0]})
+        v_cursor.execute(v_app_query, {'thing': v_[0]})
         v_thing = v_cursor.fetchone()
         if v_counter == 200:
             v_total_time = datetime.now()-v_start_time

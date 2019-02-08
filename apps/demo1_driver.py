@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import getpass
-import demo2_library
+import demo1_library
 import imp
 import hashlib
 
@@ -12,12 +12,12 @@ def get_file_checksum(p_file_name):
         v_hasher_object.update(v_file_chunk)
     return v_hasher_object.hexdigest()
 
-v_current_checksum = get_file_checksum('demo2_library.py')
+v_current_checksum = get_file_checksum('demo1_library.py')
 v_password = getpass.getpass('Enter password: ')
 v_iteration_counter = 0
 while [ 1 == 1 ]:
     v_iteration_counter += 1
-    v_edition_results = demo2_library.run_app(v_password)
+    v_edition_results = demo1_library.run_app(v_password)
 
     print ('Iteration '+str(v_iteration_counter)+' Results')
     print ('Edition'.ljust(30)
@@ -31,8 +31,8 @@ while [ 1 == 1 ]:
                + '   '
                + str(v_average_ms).rjust(16))
     print ('---------------------------------------------------------------------')
-    v_new_checksum = get_file_checksum('demo2_library.py')
+    v_new_checksum = get_file_checksum('demo1_library.py')
     if v_new_checksum != v_current_checksum:
         print ('Re-importing!')
         v_current_checksum = v_new_checksum
-        imp.reload(demo2_library)
+        imp.reload(demo1_library)

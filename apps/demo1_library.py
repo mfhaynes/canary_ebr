@@ -22,9 +22,9 @@ def run_app(p_password):
     for v_object_key in v_object_keys:
         v_counter += 1
         v_app_query = """select t.thing_id, t.thing_name, t.thing_create_date,
-                         t.object_type, t.editionable_flag, t.status,
-                         t.temporary_flag, t.generated_flag, t.secondary_flag,
-                         t.timestamp, t.default_collation
+                         t.attribute1, t.attribute2, t.attribute3,
+                         t.attribute4, t.flag1, t.flag2,
+                         t.flag3, t.flag4
                          from canary_sch.ebr_things t
                          where t.thing_id = :thing
         """

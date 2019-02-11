@@ -169,15 +169,16 @@ BEGIN
 
     IF UPDATING THEN
         IF :new.attribute1 is NOT NULL THEN
-            IF :old.attribute1 is NULL THEN
-                INSERT into ebr_thing_attributes_b
-                VALUES (:new.thing_id, 'attribute1', :new.attribute1);
-            ELSE
-                UPDATE ebr_thing_attributes_b
-                SET thing_attribute_value = :new.attribute1
-                WHERE thing_id = :new.thing_id
-                  AND thing_attribute_type = 'attribute1';
-            END IF;
+            MERGE INTO ebr_thing_attributes_b attr
+            USING (SELECT thing_id FROM ebr_thing_attributes_b
+                   WHERE thing_id = :old.thing_id
+                     AND thing_attribute_type = 'attribute1') attr_old
+            ON (attr.thing_id = attr_old.thing_id)
+            WHEN MATCHED THEN UPDATE
+                              SET thing_attribute_value = :new.attribute1
+                              WHERE thing_id = :new.thing_id
+                                AND thing_attribute_type = 'attribute1'
+            WHEN NOT MATCHED THEN INSERT VALUES (:new.thing_id, 'attribute1', :new.attribute1);
         ELSE
             DELETE from ebr_thing_attributes_b
             WHERE thing_id = :new.thing_id

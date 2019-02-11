@@ -1,3 +1,4 @@
+connect canary_sch@&database edition=release1
 pause Create the Forward Cross-Edition Trigger
 CREATE OR REPLACE TRIGGER ebr_thing_attr_fwd_xed_trig
 BEFORE INSERT OR UPDATE OR DELETE ON ebr_thing_attributes_b
@@ -167,8 +168,15 @@ BEGIN
 
     IF UPDATING THEN
         IF :new.attribute1 is NOT NULL THEN
-            INSERT into ebr_thing_attributes_b
-            VALUES (:new.thing_id, 'attribute1', :new.attribute1);
+            if :old.attribute1 is NULL THEN
+                INSERT into ebr_thing_attributes_b
+                VALUES (:new.thing_id, 'attribute1', :new.attribute1);
+            ELSE
+                UPDATE ebr_thing_attributes_b
+                SET thing_attribute_value = :new.attribute1
+                WHERE thing_id = :new.thing_id
+                  AND thing_attribute_type = 'attribute1';
+            END IF;
         ELSE
             DELETE from ebr_thing_attributes_b
             WHERE thing_id = :new.thing_id

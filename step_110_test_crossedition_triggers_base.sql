@@ -3,8 +3,14 @@ connect canary_app@&database
 set lines 140
 set pages 30
 col thing_name for a30
+col edition_name for a30
 set echo on
 alter session set edition=ORA$BASE;
+
+PAUSE After connecting to both sessions, run session edition count query
+select session_edition_id, object_name as edition_name, count(*)
+from v$session s left outer join dba_objects o on s.session_edition_id = o.object_id
+group by object_name, session_edition_id order by session_edition_id desc;
 
 PAUSE First, show we are in original edition
 select *

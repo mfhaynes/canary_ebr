@@ -3,7 +3,19 @@ connect canary_app@&database
 set echo on
 alter session set edition=ORA$BASE;
 
-PAUSE Start by Testing Forward Cross-Edition Triggers
+PAUSE First, show we are in original edition
+select attribute1
+from canary_sch.ebr_things
+where thing_id = -123;
+
+select thing_attribute_value
+from canary_sch.ebr_thing_atributes
+where thing_id = -123
+  and thing_attribute_type = 'attribute1';
+
+PAUSE Now go to other edition and run same queries.
+
+PAUSE Start Testing Forward Cross-Edition Triggers
 PAUSE show information about the attribute for one THING
 select attr.*
 from canary_sch.ebr_thing_attributes attr

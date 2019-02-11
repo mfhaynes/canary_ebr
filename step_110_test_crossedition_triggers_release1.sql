@@ -7,7 +7,19 @@ col thing_name for a30
 col attribute4 for a30
 alter session set edition=release1;
 
-PAUSE run first query in other window
+PAUSE run first queries in other window
+PAUSE Now, show we are in new edition
+select attribute1 
+from canary_sch.ebr_things
+where thing_id = -123;
+
+select thing_attribute_value
+from canary_sch.ebr_thing_atributes
+where thing_id = -123
+  and thing_attribute_type = 'attribute1';
+
+PAUSE now go back to the other window
+
 PAUSE show information about the attribute for one THING
 select attribute1
 from canary_sch.ebr_things t

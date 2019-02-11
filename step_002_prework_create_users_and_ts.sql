@@ -10,3 +10,5 @@ create user canary_app
 identified by "&canary_app_password";
 grant resource, connect to canary_app;
 grant select_catalog_role to canary_app;
+
+create tablespace canary_ts;

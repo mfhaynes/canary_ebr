@@ -1,19 +1,19 @@
 pause connect to canary_app and override edition to release1
 connect canary_app@&database
-set echo on
 set lines 160
 set pages 30
 col thing_name for a30
 col attribute4 for a30
+set echo on
 alter session set edition=release1;
 
 PAUSE run first queries in other window
 PAUSE Now, show we are in new edition
-select attribute1 
+select *
 from canary_sch.ebr_things
 where thing_id = -123;
 
-select thing_attribute_value
+select *
 from canary_sch.ebr_thing_atributes
 where thing_id = -123
   and thing_attribute_type = 'attribute1';

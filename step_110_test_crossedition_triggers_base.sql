@@ -1,14 +1,17 @@
 PAUSE connect to canary_app and override edition to ORA$BASE
 connect canary_app@&database
+set lines 140
+set pages 30
+col thing_name for a30
 set echo on
 alter session set edition=ORA$BASE;
 
 PAUSE First, show we are in original edition
-select attribute1
+select *
 from canary_sch.ebr_things
 where thing_id = -123;
 
-select thing_attribute_value
+select *
 from canary_sch.ebr_thing_attributes
 where thing_id = -123
   and thing_attribute_type = 'attribute1';

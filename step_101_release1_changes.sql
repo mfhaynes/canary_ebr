@@ -71,3 +71,6 @@ SELECT thing_id, thing_name, thing_create_date,
        attribute1, attribute2, attribute3, attribute4,
        flag1, flag2, flag3, flag4
 FROM ebr_things_b;
+
+pause DROP editioning view not needed in new edition
+DROP VIEW ebr_thing_attributes;

@@ -1,4 +1,5 @@
 connect canary_sch@&database edition=release1
+set echo on
 pause Create the Forward Cross-Edition Trigger
 CREATE OR REPLACE TRIGGER ebr_thing_attr_fwd_xed_trig
 BEFORE INSERT OR UPDATE OR DELETE ON ebr_thing_attributes_b

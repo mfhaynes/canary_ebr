@@ -185,105 +185,112 @@ BEGIN
               AND thing_attribute_type = 'attribute1';
         END IF;
         IF :new.attribute2 is NOT NULL THEN
-            IF :old.attribute2 is NULL THEN
-                INSERT into ebr_thing_attributes_b
-                VALUES (:new.thing_id, 'attribute2', :new.attribute2);
-            ELSE
-                UPDATE ebr_thing_attributes_b
-                SET thing_attribute_value = :new.attribute2
-                WHERE thing_id = :new.thing_id
-                  AND thing_attribute_type = 'attribute2';
-            END IF;
+            MERGE INTO ebr_thing_attributes_b attr
+            USING (SELECT thing_id FROM ebr_thing_attributes_b
+                   WHERE thing_id = :old.thing_id
+                     AND thing_attribute_type = 'attribute2') attr_old
+            ON (attr.thing_id = attr_old.thing_id)
+            WHEN MATCHED THEN UPDATE
+                              SET thing_attribute_value = :new.attribute2
+                              WHERE thing_id = :new.thing_id
+                                AND thing_attribute_type = 'attribute2'
+            WHEN NOT MATCHED THEN INSERT VALUES (:new.thing_id, 'attribute2', :new.attribute2);
         ELSE
             DELETE from ebr_thing_attributes_b
             WHERE thing_id = :new.thing_id
               AND thing_attribute_type = 'attribute2';
         END IF;
         IF :new.attribute3 is NOT NULL THEN
-            IF :old.attribute3 is NULL THEN
-                INSERT into ebr_thing_attributes_b
-                VALUES (:new.thing_id, 'attribute3', :new.attribute3);
-            ELSE
-                UPDATE ebr_thing_attributes_b
-                SET thing_attribute_value = :new.attribute3
-                WHERE thing_id = :new.thing_id
-                  AND thing_attribute_type = 'attribute3';
-            END IF;
+            MERGE INTO ebr_thing_attributes_b attr
+            USING (SELECT thing_id FROM ebr_thing_attributes_b
+                   WHERE thing_id = :old.thing_id
+                     AND thing_attribute_type = 'attribute3') attr_old
+            ON (attr.thing_id = attr_old.thing_id)
+            WHEN MATCHED THEN UPDATE
+                              SET thing_attribute_value = :new.attribute3
+                              WHERE thing_id = :new.thing_id
+                                AND thing_attribute_type = 'attribute3'
+            WHEN NOT MATCHED THEN INSERT VALUES (:new.thing_id, 'attribute3', :new.attribute3);
         ELSE
             DELETE from ebr_thing_attributes_b
             WHERE thing_id = :new.thing_id
               AND thing_attribute_type = 'attribute3';
         END IF;
         IF :new.attribute4 is NOT NULL THEN
-            IF :old.attribute4 is NULL THEN
-                INSERT into ebr_thing_attributes_b
-                VALUES (:new.thing_id, 'attribute4', :new.attribute4);
-            ELSE
-                UPDATE ebr_thing_attributes_b
-                SET thing_attribute_value = :new.attribute4
-                WHERE thing_id = :new.thing_id
-                  AND thing_attribute_type = 'attribute4';
-            END IF;
+            MERGE INTO ebr_thing_attributes_b attr
+            USING (SELECT thing_id FROM ebr_thing_attributes_b
+                   WHERE thing_id = :old.thing_id
+                     AND thing_attribute_type = 'attribute4') attr_old
+            ON (attr.thing_id = attr_old.thing_id)
+            WHEN MATCHED THEN UPDATE
+                              SET thing_attribute_value = :new.attribute4
+                              WHERE thing_id = :new.thing_id
+                                AND thing_attribute_type = 'attribute4'
+            WHEN NOT MATCHED THEN INSERT VALUES (:new.thing_id, 'attribute4', :new.attribute4);
         ELSE
             DELETE from ebr_thing_attributes_b
             WHERE thing_id = :new.thing_id
               AND thing_attribute_type = 'attribute4';
         END IF;
         IF :new.flag1 is NOT NULL THEN
-            IF :old.flag1 is NULL THEN
-                INSERT into ebr_thing_attributes_b
-                VALUES (:new.thing_id, 'flag1', :new.flag1);
-            ELSE
-                UPDATE ebr_thing_attributes_b
-                SET thing_attribute_value = :new.flag1
-                WHERE thing_id = :new.thing_id
-                  AND thing_attribute_type = 'flag1';
-            END IF;
+            MERGE INTO ebr_thing_attributes_b attr
+            USING (SELECT thing_id FROM ebr_thing_attributes_b
+                   WHERE thing_id = :old.thing_id
+                     AND thing_attribute_type = 'flag1') attr_old
+            ON (attr.thing_id = attr_old.thing_id)
+            WHEN MATCHED THEN UPDATE
+                              SET thing_attribute_value = :new.flag1
+                              WHERE thing_id = :new.thing_id
+                                AND thing_attribute_type = 'flag1'
+            WHEN NOT MATCHED THEN INSERT VALUES (:new.thing_id, 'flag1', :new.flag1);
         ELSE
             DELETE from ebr_thing_attributes_b
             WHERE thing_id = :new.thing_id
               AND thing_attribute_type = 'flag1';
         END IF;
         IF :new.flag2 is NOT NULL THEN
-            IF :old.flag2 is NULL THEN
-                INSERT into ebr_thing_attributes_b
-                VALUES (:new.thing_id, 'flag2', :new.flag2);
-            ELSE
-                UPDATE ebr_thing_attributes_b
-                SET thing_attribute_value = :new.flag2
-                WHERE thing_id = :new.thing_id
-                  AND thing_attribute_type = 'flag2';
-            END IF;
+            MERGE INTO ebr_thing_attributes_b attr
+            USING (SELECT thing_id FROM ebr_thing_attributes_b
+                   WHERE thing_id = :old.thing_id
+                     AND thing_attribute_type = 'flag2') attr_old
+            ON (attr.thing_id = attr_old.thing_id)
+            WHEN MATCHED THEN UPDATE
+                              SET thing_attribute_value = :new.flag2
+                              WHERE thing_id = :new.thing_id
+                                AND thing_attribute_type = 'flag2'
+            WHEN NOT MATCHED THEN INSERT VALUES (:new.thing_id, 'flag2', :new.flag2);
         ELSE
             DELETE from ebr_thing_attributes_b
             WHERE thing_id = :new.thing_id
               AND thing_attribute_type = 'flag2';
         END IF;
         IF :new.flag3 is NOT NULL THEN
-            IF :old.flag3 is NULL THEN
-                INSERT into ebr_thing_attributes_b
-                VALUES (:new.thing_id, 'flag3', :new.flag3);
-            ELSE
-                UPDATE ebr_thing_attributes_b
-                SET thing_attribute_value = :new.flag3
-                WHERE thing_id = :new.thing_id
-                  AND thing_attribute_type = 'flag3';
-            END IF;
+            MERGE INTO ebr_thing_attributes_b attr
+            USING (SELECT thing_id FROM ebr_thing_attributes_b
+                   WHERE thing_id = :old.thing_id
+                     AND thing_attribute_type = 'flag3') attr_old
+            ON (attr.thing_id = attr_old.thing_id)
+            WHEN MATCHED THEN UPDATE
+                              SET thing_attribute_value = :new.flag3
+                              WHERE thing_id = :new.thing_id
+                                AND thing_attribute_type = 'flag3'
+            WHEN NOT MATCHED THEN INSERT VALUES (:new.thing_id, 'flag3', :new.flag3);
         ELSE
             DELETE from ebr_thing_attributes_b
             WHERE thing_id = :new.thing_id
               AND thing_attribute_type = 'flag3';
         END IF;
         IF :new.flag4 is NOT NULL THEN
-            IF :old.flag4 is NULL THEN
-                INSERT into ebr_thing_attributes_b
-                VALUES (:new.thing_id, 'flag4', :new.flag4);
-            ELSE
-                UPDATE ebr_thing_attributes_b
-                SET thing_attribute_value = :new.flag4
-                WHERE thing_id = :new.thing_id
-                  AND thing_attribute_type = 'flag4';
-            END IF;
+            MERGE INTO ebr_thing_attributes_b attr
+            USING (SELECT thing_id FROM ebr_thing_attributes_b
+                   WHERE thing_id = :old.thing_id
+                     AND thing_attribute_type = 'flag4') attr_old
+            ON (attr.thing_id = attr_old.thing_id)
+            WHEN MATCHED THEN UPDATE
+                              SET thing_attribute_value = :new.flag4
+                              WHERE thing_id = :new.thing_id
+                                AND thing_attribute_type = 'flag4'
+            WHEN NOT MATCHED THEN INSERT VALUES (:new.thing_id, 'flag4', :new.flag4);
         ELSE
             DELETE from ebr_thing_attributes_b
             WHERE thing_id = :new.thing_id

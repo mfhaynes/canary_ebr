@@ -1,4 +1,6 @@
+pause Connect with explicit EDITION setting
 connect canary_sch@&database edition=release1
+
 pause Add New Columns to THINGS table.
 ALTER TABLE ebr_things_b
 ADD (attribute1 varchar2(30),

@@ -7,4 +7,4 @@ grant use on edition release1 to canary_sch, canary_app;
 pause show DEFAULT_EDITION is unchanged.
 select property_value
 from database_properties
-where property_value = 'DEFAULT_EDITION';
+where property_name = 'DEFAULT_EDITION';

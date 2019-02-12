@@ -3,9 +3,9 @@ set echo on
 pause show DEFAULT_EDITION
 select property_value
 from database_properties
-where property_value = 'DEFAULT_EDITION';
+where property_name = 'DEFAULT_EDITION';
 
 pause show DEFAULT_EDITION
 select property_value
 from database_properties
-where property_value = 'DEFAULT_EDITION';
+where property_name = 'DEFAULT_EDITION';

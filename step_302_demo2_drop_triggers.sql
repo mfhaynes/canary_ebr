@@ -1,0 +1,4 @@
+connect canary_sch@&database
+drop trigger EBR_THING_ATTR_REV_XED_TRIG_IU;
+drop trigger EBR_THING_ATTR_FWD_XED_TRIG;
+drop trigger EBR_THING_ATTR_REV_XED_TRIG_D;

@@ -1,6 +1,9 @@
 pause Connect with explicit EDITION setting
 connect canary_sch@&database edition=release1
 
+col object_name for a30
+col edition_name for a30
+
 pause show current object editions
 select object_name, edition_name from dba_objects where edition_name is not null;
 

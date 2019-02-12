@@ -8,7 +8,8 @@ select property_value
 from database_properties
 where property_name = 'DEFAULT_EDITION';
 
-pause set DEFAULT_EDITION
+pause GRANT public USE and set DEFAULT_EDITION
+GRANT USE on edition release1 to public;
 ALTER DATABASE DEFAULT EDITION=release1;
 
 pause show DEFAULT_EDITION

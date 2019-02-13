@@ -1,3 +1,4 @@
+prompt Connect to canary_sch
 connect canary_sch@&database
 select property_value
 from database_properties

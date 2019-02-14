@@ -14,7 +14,7 @@ from canary_sch.ebr_things
 where thing_id = -123;
 
 select *
-from canary_sch.ebr_thing_atributes
+from canary_sch.ebr_thing_attributes
 where thing_id = -123
   and thing_attribute_type = 'attribute1';
 

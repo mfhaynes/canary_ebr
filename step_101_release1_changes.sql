@@ -2,10 +2,11 @@ pause Connect with explicit EDITION setting
 connect canary_sch@&database edition=release1
 
 col object_name for a30
+col object_type for a20
 col edition_name for a30
 
 pause show current object editions
-select object_name, edition_name from dba_objects where edition_name is not null;
+select object_name, edition_name, edition_type from dba_objects where edition_name is not null;
 
 pause Add New Columns to THINGS table.
 ALTER TABLE ebr_things_b
@@ -84,4 +85,4 @@ pause DROP editioning view not needed in new edition
 DROP VIEW ebr_thing_attributes;
 
 pause show current object editions
-select object_name, edition_name from dba_objects where edition_name is not null;
+select object_name, edition_name, edition_type from dba_objects where edition_name is not null;

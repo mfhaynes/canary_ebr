@@ -4,6 +4,7 @@ connect canary_sch@&database edition=release1
 col object_name for a30
 col object_type for a20
 col edition_name for a30
+set lines 150
 
 pause show current object editions
 select object_name, edition_name, object_type from dba_objects where edition_name is not null;

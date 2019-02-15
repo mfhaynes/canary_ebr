@@ -18,3 +18,5 @@ ADD CONSTRAINT edition_router_pk PRIMARY KEY (edition_name)
 pause Add the default edition to the router.
 INSERT INTO edition_router
 VALUES ('ORA$BASE',1);
+
+COMMIT;

@@ -1,5 +1,5 @@
 set echo on
-set lines 140
+set lines 145
 set pages 30
 col thing_name for a30
 set pause on

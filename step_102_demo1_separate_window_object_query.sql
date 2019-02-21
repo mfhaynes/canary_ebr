@@ -1,5 +1,5 @@
 pause ARE YOU IN A NEW WINDOW?
-set lines 150
+set lines 145
 set pages 30
 col object_name for a30
 col object_type for a30

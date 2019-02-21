@@ -1,6 +1,6 @@
 pause connect to canary_app and override edition to release1
 connect canary_app@&database
-set lines 150
+set lines 145
 set pages 30
 col thing_name for a30
 col attribute4 for a30

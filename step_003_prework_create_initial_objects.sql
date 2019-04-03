@@ -13,7 +13,8 @@ ADD CONSTRAINT ebr_things_pk PRIMARY KEY (thing_id)
     USING INDEX ebr_things_pkidx;
 INSERT INTO ebr_things_b
 (SELECT object_id, object_name, created FROM dba_objects
- WHERE object_id IS NOT NULL);
+ WHERE object_id IS NOT NULL
+   AND rownum <= 10000);
 COMMIT;
 CREATE TABLE ebr_thing_attributes_b
 (thing_id number NOT NULL,

@@ -10,3 +10,4 @@ This repository will be a living codebase, updated over time as the presentation
 Presentation Releases:
   
 * v1.0 - [RMOUG Training Days 2019 (Denver, CO, USA on Feb. 21, 2019)](https://github.com/mfhaynes/canary_ebr/tree/v1.0)
+* v1.1 - [Collaborate 2019 (San Antonio, TX in April 2019)](https://github.com/mfhaynes/canary_ebr/releases/tag/v1.1)
